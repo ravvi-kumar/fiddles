@@ -1,9 +1,43 @@
+import { FilesystemItem } from "@/components/filesystem-item";
+import { Node } from "@/types";
 import Image from "next/image";
+import fs from "node:fs";
+import path from "node:path";
 
 export default function Home() {
+  const readFolder = (dirPath: string): Node[] => {
+    // Read all files and directories in the given directory
+    const items = fs.readdirSync(dirPath, { withFileTypes: true });
+
+    return items.map((item) => {
+      const fullPath = path.join(dirPath, item.name);
+      if (item.isDirectory()) {
+        return {
+          name: item.name,
+          path: dirPath,
+          fullPath: fullPath,
+          nodes: readFolder(fullPath), // Recursively read the directory
+        } as Node;
+      } else {
+        return {
+          name: item.name,
+          path: dirPath,
+          fullPath: fullPath,
+        };
+      }
+    });
+  };
+
+  const fileTree = readFolder("./src/fiddles");
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <ul>
+          {fileTree.map((node) => (
+            <FilesystemItem node={node} key={node.name} />
+          ))}
+        </ul>
         <Image
           className="dark:invert"
           src="/next.svg"
