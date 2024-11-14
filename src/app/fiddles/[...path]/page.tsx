@@ -22,7 +22,9 @@ async function Page({ params }: { params: Promise<{ path: string[] }> }) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
       {JSON.stringify(path)}
+      {JSON.stringify(path)}
       {JSON.stringify(pwd)}
+
       {/* <CopyButton text={text} className="absolute top-2 right-12" /> */}
       {/* <div
         dangerouslySetInnerHTML={{
