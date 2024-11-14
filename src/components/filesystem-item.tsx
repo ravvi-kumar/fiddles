@@ -36,7 +36,7 @@ export function FilesystemItem({ node }: { node: Node }) {
           </>
         ) : (
           <Link
-            href={`/fiddles/${node.path}/${node.name}`}
+            href={`/fiddles/${node.path.split("/").join("-")}-${node.name}`}
             className="flex items-center gap-2"
           >
             <DocumentIcon className="ml-[22px] size-6 text-gray-900" />
