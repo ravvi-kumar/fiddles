@@ -51,7 +51,7 @@ export function FilesystemItem({ node }: { node: Node }) {
             initial={{ height: 0 }}
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+            transition={{ type: "spring", bounce: 0, duration: 0.2 }}
             className="pl-6 overflow-hidden flex flex-col justify-end"
           >
             {node.nodes?.map((node) => (
