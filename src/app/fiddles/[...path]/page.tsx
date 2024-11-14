@@ -1,5 +1,5 @@
 import CopyButton from "@/components/copy-button";
-import fs from "fs/promises";
+import fs from "node:fs";
 import { BundledLanguage, codeToHtml } from "shiki";
 
 export const dynamic = "force-static";
@@ -11,7 +11,7 @@ async function Page({ params }: { params: Promise<{ path: string[] }> }) {
 
   console.log("filePath", filePath);
 
-  const text = await fs.readFile(`${process.cwd()}/${filePath}`, "utf-8");
+  const text = fs.readFileSync(`${process.cwd()}/${filePath}`, "utf-8");
 
   const lang = path.at(-1)?.split(".")[1];
 
