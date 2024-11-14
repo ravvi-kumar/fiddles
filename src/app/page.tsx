@@ -9,7 +9,7 @@ export default function Home() {
     const items = fs.readdirSync(dirPath, { withFileTypes: true });
 
     return items.map((item) => {
-      const fullPath = path.join(dirPath, item.name);
+      const fullPath = process.cwd() + dirPath + item.name;
       if (item.isDirectory()) {
         return {
           name: item.name,
