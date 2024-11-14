@@ -3,7 +3,7 @@
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 
 function CopyButton({ text, className }: { text: string; className?: string }) {
-  const [_, copy] = useCopyToClipboard();
+  const [, copy] = useCopyToClipboard();
 
   return (
     <button className={className} onClick={() => copy(text)}>

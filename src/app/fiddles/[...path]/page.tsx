@@ -1,14 +1,9 @@
 import CopyButton from "@/components/copy-button";
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import fs from "fs/promises";
-import { createHighlighter, codeToHtml, BundledLanguage } from "shiki";
+import { BundledLanguage, codeToHtml } from "shiki";
 
 async function Page({ params }: { params: Promise<{ path: string[] }> }) {
   const path = (await params).path;
-  const highlighter = await createHighlighter({
-    themes: ["nord"],
-    langs: ["typescript", "javascript", "jsx", "tsx", "markdown"],
-  });
 
   const filePath = path.join("/");
 

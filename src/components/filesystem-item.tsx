@@ -6,7 +6,7 @@ import { Node } from "@/types";
 import Link from "next/link";
 
 export function FilesystemItem({ node }: { node: Node }) {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <li key={node.name}>
