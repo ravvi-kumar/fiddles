@@ -1,6 +1,6 @@
-import CopyButton from "@/components/copy-button";
-import fs from "fs/promises";
-import { BundledLanguage, codeToHtml } from "shiki";
+// import CopyButton from "@/components/copy-button";
+// import fs from "fs/promises";
+// import { BundledLanguage, codeToHtml } from "shiki";
 
 async function Page({ params }: { params: Promise<{ path: string[] }> }) {
   const path = (await params).path;
