@@ -1,74 +1,60 @@
 import CopyButton from "@/components/copy-button";
-import { Node } from "@/types";
-import fs from "node:fs";
-import { BundledLanguage, codeToHtml } from "shiki";
+import { readFolder } from "@/utils/filesystem";
+import { renderCode } from "@/utils/code-renderer";
+import { decodeFilePath, encodeFilePath, getAllFilePaths } from "@/utils/path-utils";
+import { Suspense } from "react";
 
 export const dynamic = "force-static";
+
 export async function generateStaticParams() {
-  const filePaths: string[] = [];
-  const readFolder = (dirPath: string): Node[] => {
-    // Read all files and directories in the given directory
-    const items = fs.readdirSync(`${process.cwd()}/${dirPath}`, {
-      withFileTypes: true,
-    });
-
-    return items.map((item) => {
-      const fullPath = dirPath + "/" + item.name;
-      if (item.isDirectory()) {
-        return {
-          name: item.name,
-          path: dirPath,
-          fullPath: fullPath,
-          nodes: readFolder(fullPath), // Recursively read the directory
-        } as Node;
-      } else {
-        filePaths.push(dirPath + "/" + item.name);
-        return {
-          name: item.name,
-          path: dirPath,
-          fullPath: fullPath,
-        };
-      }
-    });
-  };
-
-  readFolder("src/folders");
-  console.log("filePaths", filePaths);
-
-  return filePaths.map((file) => ({
-    path: file.split("/").join("-"),
-  }));
+  try {
+    const fileTree = await readFolder("src/folders");
+    const filePaths = getAllFilePaths(fileTree);
+    
+    return filePaths.map((file) => ({
+      path: encodeFilePath(file),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
-async function Page({ params }: { params: Promise<{ path: string }> }) {
-  const path = (await params).path;
+interface CodeViewerProps {
+  code: string;
+  text: string;
+}
 
-  console.log("path", path);
-
-  const filePath = path.split("-").join("/");
-
-  console.log("filePath", filePath);
-
-  const text = fs.readFileSync(`${process.cwd()}/${filePath}`, "utf-8");
-
-  const lang = path.at(-1)?.split(".")[1];
-
-  const code = await codeToHtml(text, {
-    lang: lang as BundledLanguage,
-    theme: "nord",
-  });
-
+function CodeViewer({ code, text }: CodeViewerProps) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-      <CopyButton text={text} className="absolute top-2 right-12" />
+      <CopyButton text={text} className="absolute top-2 right-12 z-10" />
       <div
-        dangerouslySetInnerHTML={{
-          __html: code,
-        }}
-        className="not-prose [&>*]:p-4 [&>*]:rounded-lg"
+        dangerouslySetInnerHTML={{ __html: code }}
+        className="not-prose [&>*]:p-4 [&>*]:rounded-lg overflow-x-auto max-w-full [&_code]:whitespace-pre [&_code]:inline-block min-w-0 [&>pre]:!m-0"
       />
     </div>
   );
+}
+
+async function Page({ params }: { params: Promise<{ path: string }> }) {
+  try {
+    const path = (await params).path;
+    const filePath = decodeFilePath(path);
+    const { code, text } = await renderCode(filePath, { theme: 'nord' });
+
+    return (
+      <Suspense fallback={<div>Loading code...</div>}>
+        <CodeViewer code={code} text={text} />
+      </Suspense>
+    );
+  } catch (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-red-500">
+        Failed to load code. Please try again later.
+      </div>
+    );
+  }
 }
 
 export default Page;
