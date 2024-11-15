@@ -49,6 +49,7 @@ async function Page({ params }: { params: Promise<{ path: string }> }) {
       </Suspense>
     );
   } catch (error) {
+    console.error("Error rendering code:", error);
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-red-500">
         Failed to load code. Please try again later.
