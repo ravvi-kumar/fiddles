@@ -1,0 +1,9 @@
+Design a high-end, crypto wallet with mobile focus.
+
+The app should feel like it was crafted by a world-class designer, award-winning design: ultra-clean layout, luxurious effects.
+
+Use sophisticated typography (Inter or Geist). Regular Boldness and -5 letter spacing. With Grey #4F5D61 as primary color, Light Blue #99B3B6 and Orange #FF6E35 as secondary colors in a clean white mode UI.
+
+Use shadcn UI library for all the components.
+
+Collapsable navigation with the following pages (Home, Portfolio, Buy/Sell, Profile, Settings). On the home screen include analytics on my account health and summarize my portfolio.
