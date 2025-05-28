@@ -3,5 +3,6 @@ https://refero.design/
 https://recent.design/
 https://www.saasframe.io/
 https://www.poppr.be/en#
+https://uihut.com/
 
 https://nextjs-app-router-training.vercel.app/
