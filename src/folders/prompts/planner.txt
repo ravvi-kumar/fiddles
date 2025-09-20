@@ -1,0 +1,26 @@
+Step 1: Pick Your Idea
+
+Paste this into your AI tool of choice. Don’t worry about the idea you choose. It can be literally anything (crazy ideas encouraged…)
+
+ℹ️ The {{ text in curly brackets }} are placeholders, replace them with your own information
+
+I want you to act like a friendly but ruthless critic.
+Here’s my idea: {{ insert your idea.}}
+Please roast it. Tell me all the reasons it might fail, the assumptions I’m making, and what I might be blind to.
+Be playful but sharp.
+Didn’t get enough sting? Use the Prompt Edit trick from Part I and revise the original prompt to turn up the heat:
+
+- “Act as an investor who’s deciding whether to fund me.”
+
+- “Pretend you’re a competitor trying to destroy my idea.
+
+Step 2: Flip the Script
+
+Now ask:
+
+Take the top 3 critiques and turn them into creative opportunities.
+For each, suggest one new idea or feature that could make my concept stronger.
+
+Step 3: Refine
+
+Pull out a google doc, a Notion page, or whatever you use to take notes and write a short reflection: “My idea started as X. After the roast, I realized Y. Now I want to explore Z.”
