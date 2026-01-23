@@ -16,7 +16,7 @@ export function FilesystemItem({ node }: { node: Node }) {
             <motion.span
               animate={{ rotate: isOpen ? 90 : 0 }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="flex"
+              // className="flex"
             >
               <ChevronRightIcon
                 className={`size-4 text-gray-500 ${isOpen ? "rotate-3" : ""}`}
@@ -52,7 +52,7 @@ export function FilesystemItem({ node }: { node: Node }) {
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
             transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-            className="pl-6 overflow-hidden flex flex-col justify-end"
+            // className="pl-6 overflow-hidden flex flex-col justify-end"
           >
             {node.nodes?.map((node) => (
               <FilesystemItem node={node} key={node.name} />
