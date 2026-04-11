@@ -27,6 +27,7 @@ https://skiper-ui.com/
 
 # builder and inspi
 https://www.aura.build/
+https://motionsites.ai/
 
 # mobile
 https://www.makeitanimated.dev/
